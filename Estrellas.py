@@ -1,8 +1,9 @@
-import numpy as np
 import matplotlib.pyplot as plt
 
+# Nombres de las estrellas que podemos graficar
 estrellas = ('Boyero', 'Casiopea', 'Cazo', 'Cygnet', 'Geminis', 'Hydra', 'OsaMayor', 'OsaMenor')
 rutas = {}
+# Creamos un diccionario donde las llaves son las estrellas y los datos son las rutas de acceso a sus archivos
 for estrella in estrellas:
     rutas[estrella] = f'Constellations\{estrella}.txt'
 
@@ -58,6 +59,6 @@ def ObtenerImagen(Todas: bool, Constelacion: str):
     elif Constelacion != '':
         GraficarConstelacion(rutas[Constelacion])
     plt.savefig('Constellations\output.png')
+  with open('Constellations\output.png', 'rb') as image:
+    return image.read()
 
-
-ObtenerImagen(False, "")
