@@ -39,5 +39,5 @@ def RelacionesDeRecurrencia(input):
     return imagen
 
   except:
-    return 'Relación de recurrencia digitada de forma incorrecta'
+    return 'La relación de recurrencia que ingresaste es errónea, por favor vuelve a intentarlo'
   

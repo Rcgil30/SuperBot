@@ -53,12 +53,22 @@ def ObtenerImagen(Todas: bool, Constelacion: str):
     ax = plt.axes()
     ax.set_facecolor('black')
     plt.scatter(x, y, s=1, color='white')
+    name = ''
     if Todas:
+        name = 'Constelaciones'
         for ruta in rutas:
             GraficarConstelacion(rutas[ruta])
     elif Constelacion != '':
+        name = Constelacion
         GraficarConstelacion(rutas[Constelacion])
-    plt.savefig('Constellations\output.png')
-  with open('Constellations\output.png', 'rb') as image:
-    return image.read()
+    else:
+        name = 'Estrellas'
 
+    plt.savefig(f'Constellations\{name}.png')
+  
+
+if __name__ == '__main__':
+   ObtenerImagen(True, '')
+   ObtenerImagen(False, '')
+   for estrella in estrellas:
+      ObtenerImagen(False, estrella)
