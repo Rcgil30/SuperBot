@@ -43,8 +43,6 @@ Para escoger alguna opción ingresa alguno de los comandos 🔧:
 # Usamos decoradores, estas reciben parámetros de otras funciones y retorna distintos resultados (Reusar código)
 # Los comandos a utilizar son /start, /help, /ayuda. Creamos la función
 
-
-
 @bot.message_handler(commands=["start", "inicio"])
 def cmd_start(message):
 
@@ -63,32 +61,30 @@ def help(message):
 @bot.message_handler(commands=['EyC'])
 def EyC(message):
     def Constelacion(message):
+        if message == '/start':
+            bot.send_message(message.chat.id, 'Redirigiendote al menú de inicio')
+            bot.send_message(message.chat.id, intro)
         try:
-            con = message.text
-            if con == 'Osa Mayor':
-                imagen = ImagenABit('OsaMayor')
-            elif con == 'Osa Menor':
-                imagen = ImagenABit('OsaMenor')
-            else:
-                imagen = ImagenABit(message.text)
+            imagen = ImagenABit(message.text[1:])
             
             bot.send_photo(message.chat.id, imagen)
         except:
-            bot.send_message(message.chat.id, 'Lo siento, pero no conozco la constelación indicada, por favor vuelve a intentarlo')
+            bot.send_message(message.chat.id, 'La constelación que intentas ingresar no la puedo leer 😔 \nPor favor inténtalo de nuevo o escoge /start para volver al menú')
             bot.register_next_step_handler(message, Constelacion)
     
-    texto = """Escogiste la opción de mostrar las estrellas con una constelación
-La lista de constelaciones que tengo disponible es:
-- Boyero
-- Casiopea
-- Cazo
-- Cygnet
-- Geminis
-- Hydra
-- Osa Mayor
-- Osa Menor
+    texto = """Tu acabas de escoger la opción #3 🌠🌠
+    \n➡️ Mostrar todas las estrellas y una constelación en particular.
+    \nAhora te vamos a pedir que escojas la constelación que quieras😄:
+- /Boyero
+- /Casiopea
+- /Cazo
+- /Cygnet
+- /Geminis
+- /Hydra
+- /OsaMayor
+- /OsaMenor
 
-Por favor escoge una de estas para proceder"""
+Presiona el comando de la que desees ☄"""
 
     bot.send_message(message.chat.id, texto)
     bot.register_next_step_handler(message, Constelacion)
@@ -114,14 +110,17 @@ def Constelaciones(message):
 def Recurrencia(message):
     def ObtenerRecurrencia(m):
         recurrencia = m.text
-        fn = RelacionesDeRecurrencia(recurrencia)
-        if type(fn) != str:
-            bot.send_photo(message.chat.id, fn)
-        else:
-            bot.send_message(message.chat.id, fn)
+        if recurrencia == '/start':
+            bot.send_message(message.chat.id, 'Redirigiendote al menú de inicio')
+            bot.send_message(message.chat.id, intro)
+        try:
+            fn = RelacionesDeRecurrencia(recurrencia)
+            bot.send_photo(message.chat.id, fn)                
+        except: 
+            bot.send_message(message.chat.id, 'La relación de recurrencia que intentas ingresar no la puedo leer 😔 \nPor favor inténtalo de nuevo o escoge /start para volver al menú')
             bot.register_next_step_handler(m, ObtenerRecurrencia)
 
-    rec = """Escogiste la función de relaciones de recurrencia \nPor favor ingresa una función de la forma:
+    rec = """Tu acabas de escoger la opción de relaciones de recurrencia 😁\nPor favor ingresa una función de la forma:
 f(n) = c_1*f(n-1) + c_2*f(n-2) + ... + g(n) ; f(0) = v_1, f(1) = v_2, ..."""
     bot.send_message(message.chat.id, rec)
     bot.register_next_step_handler(message, ObtenerRecurrencia)
