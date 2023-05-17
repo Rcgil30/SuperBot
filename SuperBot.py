@@ -61,9 +61,10 @@ def help(message):
 @bot.message_handler(commands=['EyC'])
 def EyC(message):
     def Constelacion(message):
-        if message == '/start':
-            bot.send_message(message.chat.id, 'Redirigiendote al menú de inicio')
+        if message.text == '/start':
+            bot.send_message(message.chat.id, 'Redirigiendote al menú de inicio...')
             bot.send_message(message.chat.id, intro)
+            return
         try:
             imagen = ImagenABit(message.text[1:])
             
@@ -72,7 +73,7 @@ def EyC(message):
             bot.send_message(message.chat.id, 'La constelación que intentas ingresar no la puedo leer 😔 \nPor favor inténtalo de nuevo o escoge /start para volver al menú')
             bot.register_next_step_handler(message, Constelacion)
     
-    texto = """Tu acabas de escoger la opción #3 🌠🌠
+    texto = """Tu acabas de escoger la opción EyC 🌠🌠
     \n➡️ Mostrar todas las estrellas y una constelación en particular.
     \nAhora te vamos a pedir que escojas la constelación que quieras😄:
 - /Boyero
@@ -111,8 +112,9 @@ def Recurrencia(message):
     def ObtenerRecurrencia(m):
         recurrencia = m.text
         if recurrencia == '/start':
-            bot.send_message(message.chat.id, 'Redirigiendote al menú de inicio')
+            bot.send_message(message.chat.id, 'Redirigiendote al menú de inicio...')
             bot.send_message(message.chat.id, intro)
+            return
         try:
             fn = RelacionesDeRecurrencia(recurrencia)
             bot.send_photo(message.chat.id, fn)                
