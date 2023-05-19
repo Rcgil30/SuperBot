@@ -117,6 +117,7 @@ def Recurrencia(message):
             return
         try:
             fn = RelacionesDeRecurrencia(recurrencia)
+            print('a')
             bot.send_photo(message.chat.id, fn)                
         except: 
             bot.send_message(message.chat.id, 'La relación de recurrencia que intentas ingresar no la puedo leer 😔 \nPor favor inténtalo de nuevo o escoge /start para volver al menú')
