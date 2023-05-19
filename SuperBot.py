@@ -144,7 +144,7 @@ def validacion(message):
     bot.send_message(message.chat.id, rep)
 
 def ImagenABit(name):
-  with open(f'Constellations\{name}.png', 'rb') as imagen:
+  with open(f'Constellations/{name}.png', 'rb') as imagen:
     return imagen.read()
 
 # Esta función ayuda a que nuestro bot guarde la información del us\nuario (bucle infinito).
