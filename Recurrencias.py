@@ -47,8 +47,8 @@ def RelacionesDeRecurrencia(input):
   # Convertimos el resultado a LaTeX
   f = sp.latex('f(n) = ') + sp.latex(fn)
   # Enviamos esta fórmula de LaTeX a codecogs para tenerlo en formato de imagen
-  response = requests.get(f'http://latex.codecogs.com/png.latex?\\dpi{{1200}} {formula}')
-  print(responde.content)
+  response = requests.get(f'http://latex.codecogs.com/png.latex?\\dpi{{1200}} {f}')
+  print(response.content)
   # Devolvemos la imagen cono bytes para que el bot lo lea
   return io.BytesIO(response.content)
   
